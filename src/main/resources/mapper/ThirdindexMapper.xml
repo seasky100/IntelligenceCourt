@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.study.mapper.ThirdindexMapper" >
+  <resultMap id="BaseResultMap" type="com.study.domain.Thirdindex" >
+    <id column="tid" property="tid" jdbcType="INTEGER" />
+    <result column="tname" property="tname" jdbcType="VARCHAR" />
+    <result column="tweight" property="tweight" jdbcType="DOUBLE" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from thirdindex
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.study.domain.Thirdindex" >
+    insert into thirdindex (tid, tname, tweight, 
+      parent_id)
+    values (#{tid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR}, #{tweight,jdbcType=DOUBLE}, 
+      #{parentId,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.study.domain.Thirdindex" >
+    update thirdindex
+    set tname = #{tname,jdbcType=VARCHAR},
+      tweight = #{tweight,jdbcType=DOUBLE},
+      parent_id = #{parentId,jdbcType=INTEGER}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select tid, tname, tweight, parent_id
+    from thirdindex
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select tid, tname, tweight, parent_id
+    from thirdindex
+  </select>
+</mapper>

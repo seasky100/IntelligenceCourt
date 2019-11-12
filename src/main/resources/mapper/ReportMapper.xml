@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.study.mapper.ReportMapper" >
+  <resultMap id="BaseResultMap" type="com.study.domain.Report" >
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="tname" property="tname" jdbcType="VARCHAR" />
+    <result column="tsorce" property="tsorce" jdbcType="DOUBLE" />
+    <result column="time" property="time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.study.domain.Report" >
+    insert into report (cname, uid, tname, 
+      tsorce, time)
+    values (#{cname,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR}, 
+      #{tsorce,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select cname, uid, tname, tsorce, time
+    from report
+  </select>
+</mapper>
