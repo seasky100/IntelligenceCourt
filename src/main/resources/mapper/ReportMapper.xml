@@ -14,8 +14,19 @@
     values (#{cname,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR}, 
       #{tsorce,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP})
   </insert>
+  <insert id="submitRateSorce">
+
+    insert into report(cname,uid,tname,tsorce,time)
+    values (#{cname,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR},
+      #{tsorce,jdbcType=DOUBLE}, #{timestamp,jdbcType=TIMESTAMP});
+  </insert>
   <select id="selectAll" resultMap="BaseResultMap" >
     select cname, uid, tname, tsorce, time
     from report
+  </select>
+  <select id="countUser" resultType="java.lang.String">
+    select count(distinct uid) as number
+    from report
+    where cname=#{court} and unix_timestamp(time) &gt;= unix_timestamp(#{timestamp1}) and  unix_timestamp(time) &lt; unix_timestamp(#{timestamp2})
   </select>
 </mapper>

@@ -13,4 +13,8 @@ public interface SecondindexMapper {
     List<Secondindex> selectAll();
 
     int updateByPrimaryKey(Secondindex record);
+
+    Secondindex testRepeat(String name);
+
+    List<Secondindex> querySecIndex(int fid);
 }

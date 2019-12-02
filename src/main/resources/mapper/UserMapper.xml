@@ -35,4 +35,8 @@
     select uid, username, password, admin, state
     from user
   </select>
+    <select id="selectByUserName" resultType="com.study.domain.User">
+      select * from user
+      where username = #{username}
+    </select>
 </mapper>

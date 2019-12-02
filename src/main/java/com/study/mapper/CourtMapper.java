@@ -12,5 +12,9 @@ public interface CourtMapper {
 
     List<Court> selectAll();
 
+    Court selectByName(String name);
+
     int updateByPrimaryKey(Court record);
+
+    List<String> selectByCity(String city);
 }

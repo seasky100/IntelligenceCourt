@@ -40,4 +40,23 @@ public class Thirdindex {
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
+
+    public Thirdindex(){}
+
+    public Thirdindex(Integer tid, String tname, Double tweight, Integer parentId) {
+        this.tid = tid;
+        this.tname = tname;
+        this.tweight = tweight;
+        this.parentId = parentId;
+    }
+
+    @Override
+    public String toString() {
+        return "Thirdindex{" +
+                "tid=" + tid +
+                ", tname='" + tname + '\'' +
+                ", tweight=" + tweight +
+                ", parentId=" + parentId +
+                '}';
+    }
 }

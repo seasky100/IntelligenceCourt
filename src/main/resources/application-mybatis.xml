@@ -42,7 +42,7 @@
         <!-- 核心配置文件的位置 -->
         <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
             <!--配置mapper映射文件的路径,必须放在resources文件夹下，否则mybatis的mapper.xml文件都会被漏掉。或者在pom.xml配置-->
-        <!--<property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>-->
+        <property name="mapperLocations" value="classpath:mapper/*Mapper.xml"/>
     </bean>
 
 

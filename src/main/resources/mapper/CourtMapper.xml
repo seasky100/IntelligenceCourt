@@ -31,4 +31,13 @@
     select cid, cname, city
     from court
   </select>
+  <select id="selectByCity" resultType="java.lang.String">
+    select cname from court where city =#{city}
+  </select>
+  <select id="selectByName" resultType="com.study.domain.Court">
+    select cid, cname, city
+    from court
+    where cname =#{name}
+    </select>
+
 </mapper>

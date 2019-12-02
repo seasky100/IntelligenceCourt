@@ -40,4 +40,23 @@ public class Secondindex {
     public void setParentId(Integer parentId) {
         this.parentId = parentId;
     }
+
+    public Secondindex(){}
+
+    public Secondindex(Integer sid, String sname, Double sweight, Integer parentId) {
+        this.sid = sid;
+        this.sname = sname;
+        this.sweight = sweight;
+        this.parentId = parentId;
+    }
+
+    @Override
+    public String toString() {
+        return "Secondindex{" +
+                "sid=" + sid +
+                ", sname='" + sname + '\'' +
+                ", sweight=" + sweight +
+                ", parentId=" + parentId +
+                '}';
+    }
 }

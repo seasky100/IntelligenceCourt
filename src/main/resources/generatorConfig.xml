@@ -97,7 +97,7 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- 要生成的表 tableName是数据库中的表名-->
-		<table tableName="user"></table>
+		<table tableName="user_role_rel"></table>
 
 	</context>
 </generatorConfiguration>

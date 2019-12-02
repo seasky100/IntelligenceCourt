@@ -52,4 +52,25 @@ public class Report {
     public void setTime(Date time) {
         this.time = time;
     }
+
+    public Report(){}
+
+    public Report(String cname, Integer uid, String tname, Double tsorce, Date time) {
+        this.cname = cname;
+        this.uid = uid;
+        this.tname = tname;
+        this.tsorce = tsorce;
+        this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "cname='" + cname + '\'' +
+                ", uid=" + uid +
+                ", tname='" + tname + '\'' +
+                ", tsorce=" + tsorce +
+                ", time=" + time +
+                '}';
+    }
 }

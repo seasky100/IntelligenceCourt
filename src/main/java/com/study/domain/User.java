@@ -50,4 +50,25 @@ public class User {
     public void setState(Integer state) {
         this.state = state;
     }
+
+    public User(){}
+
+    public User(Integer uid, String username, String password, Integer admin, Integer state) {
+        this.uid = uid;
+        this.username = username;
+        this.password = password;
+        this.admin = admin;
+        this.state = state;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", admin=" + admin +
+                ", state=" + state +
+                '}';
+    }
 }

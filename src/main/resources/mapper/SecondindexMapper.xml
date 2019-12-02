@@ -12,16 +12,13 @@
     where sid = #{sid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.study.domain.Secondindex" >
-    insert into secondindex (sid, sname, sweight, 
-      parent_id)
-    values (#{sid,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR}, #{sweight,jdbcType=DOUBLE}, 
-      #{parentId,jdbcType=INTEGER})
+    insert into secondindex (sname, sweight, parent_id)
+    values (#{sname,jdbcType=VARCHAR}, #{sweight,jdbcType=DOUBLE}, #{parentId,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.study.domain.Secondindex" >
     update secondindex
     set sname = #{sname,jdbcType=VARCHAR},
-      sweight = #{sweight,jdbcType=DOUBLE},
-      parent_id = #{parentId,jdbcType=INTEGER}
+      sweight = #{sweight,jdbcType=DOUBLE}
     where sid = #{sid,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -33,4 +30,14 @@
     select sid, sname, sweight, parent_id
     from secondindex
   </select>
+  <select id="testRepeat" resultType="com.study.domain.Secondindex">
+    select sid, sname, sweight, parent_id
+    from secondindex
+    where sname = #{name}
+  </select>
+    <select id="querySecIndex" resultType="com.study.domain.Secondindex">
+      select sid, sname, sweight, parent_id
+    from secondindex
+    where parent_id = #{fid}
+    </select>
 </mapper>

@@ -11,17 +11,20 @@
     delete from thirdindex
     where tid = #{tid,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByParentId">
+    delete from thirdindex
+    where parent_id = #{sid}
+  </delete>
   <insert id="insert" parameterType="com.study.domain.Thirdindex" >
-    insert into thirdindex (tid, tname, tweight, 
+    insert into thirdindex (tname, tweight,
       parent_id)
-    values (#{tid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR}, #{tweight,jdbcType=DOUBLE}, 
+    values (#{tname,jdbcType=VARCHAR}, #{tweight,jdbcType=DOUBLE},
       #{parentId,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.study.domain.Thirdindex" >
     update thirdindex
     set tname = #{tname,jdbcType=VARCHAR},
-      tweight = #{tweight,jdbcType=DOUBLE},
-      parent_id = #{parentId,jdbcType=INTEGER}
+      tweight = #{tweight,jdbcType=DOUBLE}
     where tid = #{tid,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -33,4 +36,14 @@
     select tid, tname, tweight, parent_id
     from thirdindex
   </select>
+  <select id="testRepeat" resultType="com.study.domain.Thirdindex">
+    select tid, tname, tweight, parent_id
+    from thirdindex
+    where tname = #{name}
+  </select>
+    <select id="queryThirIndex" resultType="com.study.domain.Thirdindex">
+      select tid, tname, tweight, parent_id
+    from thirdindex
+    where parent_id = #{sid}
+    </select>
 </mapper>

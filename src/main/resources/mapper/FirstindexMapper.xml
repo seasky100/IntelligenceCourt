@@ -11,9 +11,9 @@
     where fid = #{fid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.study.domain.Firstindex" >
-    insert into firstindex (fid, fname, fweight
+    insert into firstindex (fname, fweight
       )
-    values (#{fid,jdbcType=INTEGER}, #{fname,jdbcType=VARCHAR}, #{fweight,jdbcType=DOUBLE}
+    values (#{fname,jdbcType=VARCHAR}, #{fweight,jdbcType=DOUBLE}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.study.domain.Firstindex" >
@@ -30,5 +30,10 @@
   <select id="selectAll" resultMap="BaseResultMap" >
     select fid, fname, fweight
     from firstindex
+  </select>
+  <select id="testRepeat" resultType="com.study.domain.Firstindex">
+    select fid,fname,fweight
+    from firstindex
+    where fname=#{name}
   </select>
 </mapper>

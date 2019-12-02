@@ -30,4 +30,21 @@ public class Firstindex {
     public void setFweight(Double fweight) {
         this.fweight = fweight;
     }
+
+    public Firstindex(){}
+
+    public Firstindex(Integer fid, String fname, Double fweight) {
+        this.fid = fid;
+        this.fname = fname;
+        this.fweight = fweight;
+    }
+
+    @Override
+    public String toString() {
+        return "Firstindex{" +
+                "fid=" + fid +
+                ", fname='" + fname + '\'' +
+                ", fweight=" + fweight +
+                '}';
+    }
 }
