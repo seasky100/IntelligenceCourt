@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.study.mapper.AccountMapper">
+    <insert id="insert">
+      insert into user(username,password,admin,state)
+      values(#{username},#{password},#{admin},#{state})
+    </insert>
+    <update id="updatePassword">
+        update user
+        set password = #{password}
+        where uid=#{uid} and username=#{username}
+    </update>
+    <select id="selectByRid" resultType="com.study.domain.User">
+        select u.uid as uid, u.username as username
+        from user as u left join user_role_rel as urr on u.uid = urr.uid
+        where urr.rid = #{rid}
+    </select>
+</mapper>

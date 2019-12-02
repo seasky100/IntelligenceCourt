@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.study.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.study.domain.Role" >
+    <id column="rid" property="rid" jdbcType="INTEGER" />
+    <result column="rnum" property="rnum" jdbcType="VARCHAR" />
+    <result column="rname" property="rname" jdbcType="VARCHAR" />
+    <result column="rweight" property="rweight" jdbcType="DOUBLE" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from role
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.study.domain.Role" >
+    insert into role (rid, rnum, rname, 
+      rweight)
+    values (#{rid,jdbcType=INTEGER}, #{rnum,jdbcType=VARCHAR}, #{rname,jdbcType=VARCHAR}, 
+      #{rweight,jdbcType=DOUBLE})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.study.domain.Role" >
+    update role
+    set rnum = #{rnum,jdbcType=VARCHAR},
+      rname = #{rname,jdbcType=VARCHAR},
+      rweight = #{rweight,jdbcType=DOUBLE}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select rid, rnum, rname, rweight
+    from role
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select rid, rnum, rname, rweight
+    from role
+  </select>
+</mapper>

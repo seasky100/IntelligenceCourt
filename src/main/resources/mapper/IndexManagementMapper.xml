@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.study.mapper.IndexManagementMapper">
+    <update id="updateThreeIndexWeight">
+        update firstindex set fweight = #{firstWeight} where fname = #{firstIndex};
+        update secondindex set sweight = #{secWeight} where sname = #{secIndex};
+        update thirdindex set tweight = #{thirWeight} where tname = #{thirIndex};
+    </update>
+    <select id="getRelation" resultType="com.study.bean.IndexRelation">
+      select f.fname as firstIndex,f.fweight as firstWeight,s.sname as secondIndex,s.sweight as secondWeight,t.tname as thirdIndex,t.tweight as thirdWeight
+      from firstindex as f left join secondindex as s on f.fid = s.parent_id
+      left join thirdindex as t on s.sid = t.parent_id
+    </select>
+    <select id="getThreeIndex" resultType="com.study.bean.ThreeIndex">
+     select fid,fname,sid,sname,s.parent_id as sparentid, tid,tname,t.parent_id as tparentid from firstindex as f left join secondindex as s on s.parent_id = fid
+    left join thirdindex as t on t.parent_id = s.sid
+    </select>
+</mapper>

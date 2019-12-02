@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.study.mapper.EchartsDataMapper">
+
+    <select id="selectByCourtTime" resultType="com.study.bean.OneCourtSorce">
+    select r.cname as name,sum(f.fweight * s.sweight * t.tweight * tsorce) as endSorce
+    from report as r left join thirdindex as t on  r.tname = t.tname
+    left join secondindex as s on t.parent_id = s.sid left join  firstindex as f on s.parent_id = fid
+    where r.cname = #{court}
+    and unix_timestamp(time) &gt;= unix_timestamp(#{timestamp1}) and  unix_timestamp(time) &lt; unix_timestamp(#{timestamp2});
+  </select>
+    <select id="selectByCityTime" resultType="com.study.bean.OneCourtSorce">
+    select sc.cname as name,sc.city,sum(sorce)/count(1) as endSorce from (select r.cname as cname,r.uid as uid,sum(r.tsorce*t.tweight*s.sweight*f.fweight) as sorce,c.city as city from report as r left join court as c on r.cname = c.cname
+    left join thirdindex as t on r.tname = t.tname
+    left join secondindex as s on t.parent_id = s.sid
+    left join firstindex as f on s.parent_id = f.fid
+    where c.city =#{city} and unix_timestamp(time) &gt;= unix_timestamp(#{timestamp1}) and  unix_timestamp(time) &lt; unix_timestamp(#{timestamp2}) GROUP BY r.uid,r.cname ) sc GROUP BY sc.cname order by  endSorce DESC
+  </select>
+    <select id="selectCourtFirstIndexSorceByCity" resultType="com.study.bean.CourtFirstIndexSorce">
+    select r.cname as court,f.fname as firstIndexName,sum(r.tsorce*t.tweight*s.sweight*f.fweight)/count(DISTINCT uid) as sorce
+    from report as r left join thirdindex as t on r.tname = t.tname
+    left join secondindex as s on t.parent_id = s.sid
+    left join firstindex as f on s.parent_id =fid
+    left join court as co on r.cname = co.cname
+    where unix_timestamp(time) &gt;= unix_timestamp(#{timestamp1}) and  unix_timestamp(time) &lt; unix_timestamp(#{timestamp2}) and co.city=#{city}
+    GROUP BY r.cname,f.fname
+  </select>
+    <select id="selectLatestCourtByCity" resultType="com.study.bean.LatestCourt">
+    select DISTINCT r.cname as name,r.time as time
+    from report as r left join court as c on r.cname = c.cname
+    where c.city=#{city}
+    ORDER BY r.time desc
+  </select>
+</mapper>
