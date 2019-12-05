@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <html>
 <head>
     <title>法院评分</title>
@@ -20,6 +21,7 @@
     </div>
     <div class="layui-btn" id="submit" style="display: none">提交</div>
 </div>
+<div style="display: none" id="shii_username"><shiro:principal property="username"/></div>
 <script>
     var index_length = 0;//总的三级指标长度
     window.sessionStorage.clear();
@@ -83,6 +85,7 @@
 </script>
 <script>
     $("#submit").click(function () {
+        console.log("==="+$("#shii_username").html())
         var storage = window.sessionStorage;
         console.log("index_len=="+index_length+";;;storlen=="+storage.length)
         if (index_length == storage.length) {
@@ -99,10 +102,22 @@
             /*console.log(data);*/
             var dataJson = eval('(' + data + ')');
             var courtName =$("#court_title").html();
-            console.log(courtName+"===============");
+            var uid = '';
+            /*获取userid*/
+            $.ajax({
+                type:'post',
+                url:'/getUid?username='+$("#shii_username").html(),
+                dataType: "json",
+                contentType: "application/json",
+                success:function(result){
+                    console.log("uid===="+result);
+                    uid = result;
+                }
+            })
+
             $.ajax({
                 type: 'post',
-                url: '/submitRateSorce?court=' + courtName + '&uid='+${sessionScope.uid},
+                url: '/submitRateSorce?court=' + courtName + '&uid='+uid,
                 data: JSON.stringify(dataJson),
                 dataType: "json",
                 contentType: "application/json",

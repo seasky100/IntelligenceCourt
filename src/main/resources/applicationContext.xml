@@ -21,7 +21,8 @@
     <!--导入springMVC，spring mvc配置文件-->
     <import resource="classpath:application-mvc.xml"/>
 
-
+    <!--导入shiro-->
+    <import resource="classpath:application-shiro.xml"/>
 
 
 </beans>

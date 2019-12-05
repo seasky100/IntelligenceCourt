@@ -30,6 +30,7 @@ public class EchartsDataController {
      * 获得城市排名模块所需要数据
      * */
     public HashMap<String, Double> getCityRank(@RequestBody JSONObject data) {
+        /*System.out.println("jin");*/
         int num = subtract(data);
         HashMap<String, Double> cityRank = new HashMap<>();
         Timestamp timestamp1 = DateFormat.dateFormat(data.getString("start"));
@@ -40,7 +41,7 @@ public class EchartsDataController {
             Map.Entry<String, Double> entry = (Map.Entry<String, Double>) map1it.next();
             cityRank.put(entry.getKey(), Double.parseDouble(String.format("%.2f", entry.getValue() / num)));
         }
-        System.out.println("看看num="+num);
+        /*System.out.println("看看num="+num);*/
         return cityRank;
     }
 
@@ -60,7 +61,7 @@ public class EchartsDataController {
             s.setEndSorce(Double.parseDouble(String.format("%.2f", t)));
             res.add(s);
         }
-        System.out.println("看看num="+num);
+        /*System.out.println("看看num="+num);*/
         return res;
     }
 

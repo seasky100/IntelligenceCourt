@@ -12,7 +12,6 @@ $(window).load(function (){
 myChart4.on('click',function(params){
     console.log(params);
     var cityName = params.name;
-
     getCourtRank(cityName,start_time,end_time);
     getCourtSorce(cityName,start_time,end_time);
     firstIndexSorce(cityName,start_time,end_time);
@@ -22,7 +21,7 @@ myChart4.on('click',function(params){
 /*获得城市排名*/
 function getCityRank(start,end){
     var p = {"start": start, "end": end}
-    /*$.ajax({
+    $.ajax({
         type: "post",
         url: "/getCityRank",
         data: JSON.stringify(p),
@@ -52,7 +51,7 @@ function getCityRank(start,end){
                 ]
             })
         }
-    })*/
+    })
 }
 
 /*法院得分排名*/

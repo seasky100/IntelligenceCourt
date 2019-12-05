@@ -1,5 +1,6 @@
 <%@ page import="javax.xml.bind.SchemaOutputResolver" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <html>
 <head>
     <title>Title</title>
@@ -8,10 +9,8 @@
 </head>
 <body class="layui-layout-body">
 <%
-    String username = session.getAttribute("username").toString(); //从session里把a拿出来，并赋值给M
-    /*if(session.getAttribute("username") == null){
-
-    }*/
+    /*Object user = session.getAttribute("user");*/ //从session里把a拿出来，并赋值给M
+    /*System.out.println("user========----"+user);*/
 
 %>
 <div class="layui-layout layui-layout-admin">
@@ -35,14 +34,16 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="../../icon/head.jpg" class="layui-nav-img">
-                    ${sessionScope.username }
+                    <%--${sessionScope.username }--%>
+                    <%--${sessionScope.user.username }--%>
+                    <shiro:principal property="username"/>
                 </a>
                 <%--<dl class="layui-nav-child">
                     <dd><a href="">基本资料</a></dd>
                     <dd><a href="">安全设置</a></dd>
                 </dl>--%>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="/logout">退了</a></li>
         </ul>
     </div>
 

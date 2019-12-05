@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.study.bean.ThreeIndex;
 import com.study.bean.queryCourtStatus;
 import com.study.domain.Court;
-import com.study.domain.Report;
 import com.study.service.CourtService;
 import com.study.service.IndexManagementService;
 import com.study.service.ReportService;
+import com.study.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +28,8 @@ public class RateController {
     IndexManagementService indexManagementService;
     @Autowired
     ReportService reportService;
+    @Autowired
+    UserService userService;
 
     @RequestMapping(value="/getCourt",method= RequestMethod.POST)
     @ResponseBody
@@ -61,6 +63,14 @@ public class RateController {
         Date date = new Date();
         int res = reportService.submitRateSorce(cname, uid, data, new Timestamp(date.getTime()));
         return res;
+    }
+
+    @RequestMapping(value = "/getUid",method = RequestMethod.POST)
+    @ResponseBody
+    public String getUid(WebRequest req){
+        String uid = userService.selectUid(req.getParameter("username"));
+        System.out.println(req.getParameter("username"));
+        return uid;
     }
 
 }

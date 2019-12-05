@@ -37,14 +37,10 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/loginCheck",method = RequestMethod.POST)
+    /*@RequestMapping(value = "/loginCheck",method = RequestMethod.POST)
     @ResponseBody
     public int loginCheck(@RequestBody User user, WebRequest request, HttpServletRequest req){
-        /*System.out.println(user.toString());
-        System.out.println(request.getParameter("code"));
-        System.out.println(req.getSession().getAttribute("verifyCodeValue"));*/
         User userRes = userService.selectByUserName(user.getUsername());
-
         if(!request.getParameter("code").equals(req.getSession().getAttribute("verifyCodeValue"))){
             return VERIFYCODE_ERROR;
         }else if(userRes == null){
@@ -52,16 +48,15 @@ public class LoginController {
         }else if(!user.getPassword().equals(userRes.getPassword())){
             return PASSWORD_ERROR;
         }
-        /*req.getSession().setAttribute("username", true);
-        req.getSession().setMaxInactiveInterval(30*60);*/
-        /*登录成功，用户信息放到session中*/
         HttpSession session = req.getSession();
-        session.setAttribute("username",userRes.getUsername());
-        session.setAttribute("uid",userRes.getUid());
-        /*System.out.println("成功");
-        System.out.println("user类：："+userRes.toString());*/
+        session.setAttribute("user",userRes);
         return SUCCESS;
+    }*/
+    @RequestMapping("/loginCheck")
+    public String login(){
+        return "redirect:login.jsp";
     }
+
 
     @RequestMapping("/getVerifyCode")
     /*

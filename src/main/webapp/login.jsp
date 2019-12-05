@@ -2,10 +2,11 @@
   Created by IntelliJ IDEA.
   User: yezhi
   Date: 2019/11/12
-  Time: 16:47
-  To change this template use File | Settings | File Templates.
+Time: 16:47
+To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <meta charset="UTF-8">
 <title>智慧法院平台</title>
@@ -136,16 +137,16 @@
             <h2>登录</h2>
             <p class="tyg-p">欢迎访问 智慧能力</p>
             <div style="margin:5px 0px;">
-                <input type="text" id="loginNumber" placeholder="请输入账号..."/>
+                <input type="text" id="loginNumber" name="username" placeholder="请输入账号..."/>
             </div>
             <div style="margin:5px 0px;">
-                <input type="password" id="loginPassword" placeholder="请输入密码..."/>
+                <input type="password" id="loginPassword" name="password" placeholder="请输入密码..."/>
             </div>
-            <div style="margin:5px 0px;">
+            <%--<div style="margin:5px 0px;">
                 <input type="text" id="code" style="width:150px;" placeholder="请输入验证码..."/>
                 <img src="/getVerifyCode" style="vertical-align:bottom;" alt="验证码"
                      onclick="this.src=this.src+'?'+Math.random()"/>
-            </div>
+            </div>--%>
             <button type="button" id="loginButton">登<span style="width:20px;"></span>录</button>
         </form>
     </div>
@@ -160,12 +161,12 @@
 </script>
 <![endif]-->--%>
 <script>
-    $("#loginButton").click(function () {
-        /*console.log("hhhh")*/
+    /*$("#loginButton").click(function () {
+        /!*console.log("hhhh")*!/
         var username = $("#loginNumber").val();
         var password = $("#loginPassword").val();
         var code = $("#code").val();
-        /*console.log(code);*/
+        /!*console.log(code);*!/
         var params = {"username": username, "password": password};
         $.ajax({
             type: "post",
@@ -176,7 +177,7 @@
             success: function (result) {
                 console.log("登录测试：" + result);
                 if (result == 1) {
-                    /*alert("登陆成功");*/
+                    /!*alert("登陆成功");*!/
                     $("#jump")[0].click();
                 } else if (result == -20) {
                     alert("验证码错误！！！");
@@ -189,7 +190,21 @@
                 }
             }
         });
-    });
+    });*/
+    $("#loginButton").click(function(){
+        /*发送请求，做登录认证*/
+        $.post("/loginCheck",$("form").serialize(),function(data){
+            console.log(data);
+            /*将json格式字符串转成json数据*/
+            data = $.parseJSON(data);
+            if(data.success){
+                /*跳转到首页*/
+                $("#jump")[0].click();
+            }else{
+                alert(data.msg);
+            }
+        });
+    })
 </script>
 </body>
 </html>

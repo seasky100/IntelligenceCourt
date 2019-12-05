@@ -25,4 +25,10 @@ public class UserServiceImpl implements UserService {
     public int deleteByPrimaryKey(Integer uid) {
         return userMapper.deleteByPrimaryKey(uid);
     }
+
+    @Override
+    public String selectUid(String username) {
+        String uid = userMapper.selectUid(username);
+        return uid;
+    }
 }

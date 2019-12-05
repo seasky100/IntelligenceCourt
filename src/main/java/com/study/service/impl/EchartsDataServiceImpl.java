@@ -39,8 +39,15 @@ public class EchartsDataServiceImpl implements EchartsDataService {
             for(int j=0;j<courtNames.size();j++){
                 String court = courtNames.get(j);
                 OneCourtSorce oneCourtSorce = echartsDataMapper.selectByCourtTime(court, timestamp1, timestamp2);
-                String number = reportMapper.countUser(court, timestamp1, timestamp2);
-                sorce = sorce + oneCourtSorce.getEndSorce()/Integer.parseInt(number);
+                if(oneCourtSorce != null){
+                    String number = reportMapper.countUser(court, timestamp1, timestamp2);
+                    sorce = sorce + oneCourtSorce.getEndSorce()/Integer.parseInt(number);
+                }else{
+                    continue;
+                }
+
+                /*String number = reportMapper.countUser(court, timestamp1, timestamp2);
+                sorce = sorce + oneCourtSorce.getEndSorce()/Integer.parseInt(number);*/
             }
             sorce = sorce / courtNames.size();
             map.put(cities.get(i).getCityname(),sorce);

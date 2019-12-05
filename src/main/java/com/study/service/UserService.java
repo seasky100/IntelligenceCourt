@@ -7,4 +7,6 @@ public interface UserService {
     User selectByUserName(String username);
 
     int deleteByPrimaryKey(Integer uid);
+
+    String selectUid(String username);
 }

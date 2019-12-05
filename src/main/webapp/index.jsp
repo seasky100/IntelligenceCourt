@@ -39,7 +39,6 @@
             document.getElementById("showTime").innerHTML = y + "年" + mt + "月" + day + "日" + h + "时" + m + "分" + s + "秒";
             t = setTimeout(time, 1000);
         }
-
     </script>
     <div class="mainbox">
         <ul class="clearfix">
@@ -125,17 +124,15 @@
             console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
             console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
         }
-
     });
     $("#query").click(function () {
-        console.log("看看开始"+start);
-        console.log("看看结束"+end);
+        /*console.log("看看开始"+start);
+        console.log("看看结束"+end);*/
         start_time = start;
         end_time =end;
         if (start != "" && end != "") {
             start_time = start;
             end_time =end;
-
             getCityRank(start_time,end_time);
             var init_city ='南昌';
             getCourtRank(init_city,start_time,end_time);
@@ -143,7 +140,6 @@
             firstIndex();
             firstIndexSorce(init_city,start_time,end_time);
             latestCourt(init_city);
-
         } else {
             alert("请选择时间");
         }
