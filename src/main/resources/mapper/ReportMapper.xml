@@ -15,7 +15,6 @@
       #{tsorce,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP})
   </insert>
   <insert id="submitRateSorce">
-
     insert into report(cname,uid,tname,tsorce,time)
     values (#{cname,jdbcType=VARCHAR}, #{uid,jdbcType=INTEGER}, #{tname,jdbcType=VARCHAR},
       #{tsorce,jdbcType=DOUBLE}, #{timestamp,jdbcType=TIMESTAMP});
@@ -29,4 +28,8 @@
     from report
     where cname=#{court} and unix_timestamp(time) &gt;= unix_timestamp(#{timestamp1}) and  unix_timestamp(time) &lt; unix_timestamp(#{timestamp2})
   </select>
+    <select id="testIfRate" resultType="com.study.domain.Report">
+      select * from report
+      where cname=#{cname} and uid=#{uid} and unix_timestamp(time) &gt;= unix_timestamp(#{nowTime})
+    </select>
 </mapper>

@@ -6,6 +6,9 @@ import com.study.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     public final static int SUCCESS = 1;
@@ -30,5 +33,17 @@ public class UserServiceImpl implements UserService {
     public String selectUid(String username) {
         String uid = userMapper.selectUid(username);
         return uid;
+    }
+
+    @Override
+    public ArrayList<String> getRolesByUid(int uid) {
+        ArrayList<String> rolesByUid = userMapper.getRolesByUid(uid);
+        return rolesByUid;
+    }
+
+    @Override
+    public ArrayList<String> getPermissionByUid(int uid) {
+        ArrayList<String> permissionByUid = userMapper.getPermissionByUid(uid);
+        return permissionByUid;
     }
 }

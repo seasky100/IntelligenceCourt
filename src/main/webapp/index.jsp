@@ -1,9 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
 <head>
     <meta charset="utf-8">
     <title>智慧法院</title>
     <script type="text/javascript" src="index/js/jquery-1.10.2.js"></script>
+    <%--<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>--%>
     <script type="text/javascript" src="index/js/echarts-4.2.1.min.js"></script>
     <script type="text/javascript" src="index/js/jquery.liMarquee.js"></script>
     <script type="text/javascript" src="index/js/jquery.cxselect.min.js"></script>

@@ -1,6 +1,8 @@
 package com.study.mapper;
 
 import com.study.domain.User;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public interface UserMapper {
@@ -17,4 +19,8 @@ public interface UserMapper {
     User selectByUserName(String username);
 
     String selectUid(String username);
+
+    ArrayList<String> getRolesByUid(int uid);
+
+    ArrayList<String> getPermissionByUid(int uid);
 }

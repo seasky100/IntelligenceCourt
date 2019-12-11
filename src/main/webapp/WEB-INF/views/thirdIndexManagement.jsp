@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: yezhi
-  Date: 2019/11/22
-  Time: 0:29
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <html>
 <head>
     <title>Title</title>
@@ -37,8 +31,18 @@
     {{d.LAY_TABLE_INDEX+1}}
 </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <shiro:hasPermission name="index:edit">
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    </shiro:hasPermission>
+    <shiro:lacksPermission name="index:edit">
+        <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="edit">编辑</a>
+    </shiro:lacksPermission>
+    <shiro:hasPermission name="index:delete">
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </shiro:hasPermission>
+    <shiro:lacksPermission name="index:delete">
+        <a class="layui-btn layui-btn-xs layui-btn-disabled" lay-event="del">删除</a>
+    </shiro:lacksPermission>
 </script>
 <script>
     layui.use('table', function(){

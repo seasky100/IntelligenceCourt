@@ -8,6 +8,8 @@ $(window).load(function (){
     firstIndexSorce(init_city,start_time,end_time);
     latestCourt(init_city);
 })
+
+
 /*点击城市触发函数，重新加载数据*/
 myChart4.on('click',function(params){
     console.log(params);
@@ -253,11 +255,14 @@ function latestCourt(cityName){
         type:"post",
         url:'/getLatestCourt?city='+cityName,
         dataType:"json",
+        contentType:"application/json",
         success:function(result){
             $("#table3").empty();
+
             var table3_html='<ul>';
             for(var j=0;j<result.length;j++){
-                table3_html = table3_html + '<li style="line-height: 40px;height: 40px;"><p ><span style="color: rgba(255,255,255,.4);display: inline-block;width: 70%;">'+ result[j].name +'</span><span style="color: rgba(255,255,255,.4);display: inline-block;width: 30%;">'+ result[j].time.split(" ")[0]+'</span></p></li>';
+                console.log("==================="+typeof result[j].time)
+                table3_html = table3_html + '<li style="line-height: 40px;height: 40px;"><p ><span style="color: rgba(255,255,255,.4);display: inline-block;width: 70%;">'+ result[j].name +'</span><span style="color: rgba(255,255,255,.4);display: inline-block;width: 30%;">'+ result[j].time+'</span></p></li>';
             }
             table3_html = table3_html + '</ul>';
             $("#table3").append(table3_html);
@@ -268,4 +273,9 @@ function latestCourt(cityName){
             });
         }
     })
+}
+
+function parseDateTime(dat)
+{
+
 }

@@ -9,7 +9,7 @@ import java.util.Date;
 * 最新被评分的法院
 * */
 public class LatestCourt {
-    @JsonFormat(pattern = "yyyy-mm-dd hh:mm:ss",timezone = "GTM+8")
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GTM+8")
     private Date time;
     private String name;
 

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
-<html>
+<!DOCTYPE html>
 <head>
     <title>法院评分</title>
     <link rel="stylesheet" href="../../layui/css/layui.css" media="all">
@@ -21,11 +21,13 @@
     </div>
     <div class="layui-btn" id="submit" style="display: none">提交</div>
 </div>
-<div style="display: none" id="shii_username"><shiro:principal property="username"/></div>
+<div style="display: none" id="shii_uid"><shiro:principal property="uid"/></div>
 <script>
     var index_length = 0;//总的三级指标长度
     window.sessionStorage.clear();
+    index_length = 0;
     $("#query_court").click(function () {
+        $("#test").empty();
         if ($("#court_name").val() != '') {
             $.ajax({
                 type: "post",
@@ -85,7 +87,6 @@
 </script>
 <script>
     $("#submit").click(function () {
-        console.log("==="+$("#shii_username").html())
         var storage = window.sessionStorage;
         console.log("index_len=="+index_length+";;;storlen=="+storage.length)
         if (index_length == storage.length) {
@@ -102,9 +103,9 @@
             /*console.log(data);*/
             var dataJson = eval('(' + data + ')');
             var courtName =$("#court_title").html();
-            var uid = '';
+            var uid = $("#shii_uid").html();
             /*获取userid*/
-            $.ajax({
+            /*$.ajax({
                 type:'post',
                 url:'/getUid?username='+$("#shii_username").html(),
                 dataType: "json",
@@ -112,8 +113,11 @@
                 success:function(result){
                     console.log("uid===="+result);
                     uid = result;
+
+
+
                 }
-            })
+            })*/
 
             $.ajax({
                 type: 'post',
@@ -122,6 +126,7 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
+                    console.log("woteme yaokankan ==="+result)
                     if (result == 1) {
                         layui.use('layer', function () {
                             var layer = layui.layer;
@@ -139,7 +144,21 @@
                                 location.reload();
                             })
                         });
-                    } else {
+                    } else if(result == -1){
+                        layui.use('layer', function () {
+                            var layer = layui.layer;
+                            layer.msg('您已评分，无法再次提交!', {
+                                icon: 2,
+                                shade: [0.8, '#393D49'],
+                                time: 4000 //2秒关闭（如果不配置，默认是3秒）
+                            }, function () {
+                                console.log("已经提胶片评分")
+                                window.sessionStorage.clear();
+                                location.reload();
+                            })
+                        });
+
+                    }else {
                         layui.use('layer', function () {
                             var layer = layui.layer;
                             layer.msg('提交评测失败，请重新提交!', {
@@ -151,6 +170,7 @@
                     }
                 }
             })
+
         } else {
             alert("有部分指标未评分！！！");
         }

@@ -8,6 +8,7 @@ import com.study.service.CourtService;
 import com.study.service.IndexManagementService;
 import com.study.service.ReportService;
 import com.study.service.UserService;
+import com.study.util.DateFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -61,6 +63,18 @@ public class RateController {
         String cname = req.getParameter("court");
         int uid = Integer.parseInt(req.getParameter("uid"));
         Date date = new Date();
+
+        /*判断是否已经对这个法院评分过，以当前提交时月份为区间，查看这个月是否评分过，该月份以前不管*/
+        Calendar cal = Calendar.getInstance();
+        String year = String.valueOf(cal.get(Calendar.YEAR));
+        String month = String.valueOf(cal.get(Calendar.MONTH )+1);
+        String str_time = year + "-" + month;
+        Timestamp nowTime = DateFormat.dateFormat(str_time);
+        if( reportService.testIfRate(cname,uid,nowTime).size() != 0){
+            System.out.println(reportService.testIfRate(cname,uid,nowTime).toString());
+            return -1;
+        }
+
         int res = reportService.submitRateSorce(cname, uid, data, new Timestamp(date.getTime()));
         return res;
     }

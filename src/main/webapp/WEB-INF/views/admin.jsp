@@ -1,4 +1,5 @@
 <%@ page import="javax.xml.bind.SchemaOutputResolver" %>
+<%@ page import="java.util.Enumeration" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro"%>
 <html>
@@ -51,30 +52,42 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">指标管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" id="relation">指标关系</a></dd>
-                        <dd><a href="javascript:;" id="firstIndex">一级指标</a></dd>
-                        <dd><a href="javascript:;" id="secondIndex">二级指标</a></dd>
-                        <dd><a href="javascript:;" id="thirdIndex">三级指标</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">账号管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" id="staff">法院用户账号</a></dd>
-                        <dd><a href="javascript:;" id="masses">普通用户账号</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="javascript:;" id="role">用户权重</a></li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">开始评分</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" id="select_court">法院选择</a></dd>
-                        <%--<dd><a href="javascript:;">上传Excel</a></dd>--%>
-                    </dl>
-                </li>
+
+                <shiro:hasPermission name="index:management">
+                    <li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;">指标管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" id="relation">指标关系</a></dd>
+                            <dd><a href="javascript:;" id="firstIndex">一级指标</a></dd>
+                            <dd><a href="javascript:;" id="secondIndex">二级指标</a></dd>
+                            <dd><a href="javascript:;" id="thirdIndex">三级指标</a></dd>
+                        </dl>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="account:management">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">账号管理</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" id="staff">法院用户账号</a></dd>
+                            <dd><a href="javascript:;" id="masses">普通用户账号</a></dd>
+                        </dl>
+                    </li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="weight:management">
+                    <li class="layui-nav-item"><a href="javascript:;" id="role">用户权重</a></li>
+                </shiro:hasPermission>
+                <shiro:hasPermission name="user:rate">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">开始评分</a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;" id="select_court">法院选择</a></dd>
+                                <%--<dd><a href="javascript:;">上传Excel</a></dd>--%>
+                        </dl>
+                    </li>
+                </shiro:hasPermission>
+
+
+
                 <%--<li class="layui-nav-item"><a href="javascript:;">下载评分结果</a></li>--%>
             </ul>
         </div>
@@ -83,7 +96,7 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <%--<div style="padding: 15px;">内容主体区域</div>--%>
-        <iframe src="/relationOFindex" id ="iframe" frameborder="0" height="100%" width="100%" ></iframe>
+        <iframe src="" id ="iframe" frameborder="0" height="100%" width="100%" ></iframe>
     </div>
 
     <div class="layui-footer">

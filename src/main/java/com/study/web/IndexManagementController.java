@@ -12,16 +12,14 @@ import com.study.service.IndexManagementService;
 import com.study.service.SecondIndexService;
 import com.study.service.ThirdIndexService;
 import com.study.util.Page;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.HandlerMethod;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @Controller
@@ -174,5 +172,23 @@ public class IndexManagementController {
         return thirdindices;
     }
 
-
+    @ExceptionHandler(AuthorizationException.class)
+    public void handleShiroException(HandlerMethod method, HttpServletResponse response) throws Exception{ /*method  发生异常的方法*/
+        /*跳转到一个界面  界面提示没有 权限*/
+        /*判断 当前的请求是不是Json请求  如果是  返回json给浏览器 让它自己来做跳转*/
+        /*获取方法上的注解*/
+        ResponseBody methodAnnotation = method.getMethodAnnotation(ResponseBody.class);
+        if (methodAnnotation != null){
+            //Ajax
+            /*AjaxRes ajaxRes = new AjaxRes();
+            ajaxRes.setSuccess(false);
+            ajaxRes.setMsg("你没有权限操作");
+            String s = new ObjectMapper().writeValueAsString(ajaxRes);*/
+            String s = "-1";
+            response.setCharacterEncoding("utf-8");
+            response.getWriter().print(s);
+        }else {
+            response.sendRedirect("nopermission.jsp");
+        }
+    }
 }

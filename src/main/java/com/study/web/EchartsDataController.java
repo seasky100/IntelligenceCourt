@@ -94,6 +94,8 @@ public class EchartsDataController {
     @ResponseBody
     public List<LatestCourt> getLatestCourt(WebRequest req){
         List<LatestCourt> res = echartsDataService.selectLatestCourtByCity(req.getParameter("city"));
+        System.out.println(res.toString());
+
         return res;
     }
 
